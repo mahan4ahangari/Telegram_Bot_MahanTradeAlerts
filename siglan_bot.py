@@ -4,7 +4,7 @@ from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes, MessageHandler, filters
 
 BOT_TOKEN = "7842856740:AAHeNaZgSEhYZSUPJz_JjHoyNZ0Yp8RkpcY"
-USERS_FILE = "py/signal tel project/allowed_users.json"
+USERS_FILE = "PATH_YOUR_JSON_FILE" #مسیر فایل json شما
 TIME_FORMAT = "%Y-%m-%d %H:%M:%S"
 OWNER_ID = 1039210853  # آیدی شما به عنوان Owner
 
