@@ -4,16 +4,15 @@ from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes, MessageHandler, filters
 import os
 
-BOT_TOKEN = os.getenv("BOT_TOKEN")  # تو Render از Secret Env استفاده کن
+BOT_TOKEN = os.getenv("BOT_TOKEN")  # Secret Env Variable در Render
 OWNER_ID = 1039210853
+DATABASE_URL = os.getenv("DATABASE_URL")  # Secret Env Variable
 
 # 📌 اتصال به PostgreSQL
-DATABASE_URL = os.getenv("DATABASE_URL")  # تو Render بعد از ساخت دیتابیس موجود است
-
 def get_connection():
     return psycopg2.connect(DATABASE_URL, sslmode="require")
 
-# 📂 خواندن لیست کاربران فعال
+# 📂 خواندن کاربران
 def load_allowed_users():
     conn = get_connection()
     cur = conn.cursor()
@@ -23,7 +22,7 @@ def load_allowed_users():
     conn.close()
     return [{"user_id": r[0], "expire_time": r[1].strftime("%Y-%m-%d %H:%M:%S")} for r in rows]
 
-# 💾 اضافه یا به‌روزرسانی کاربر
+# 💾 اضافه یا بروزرسانی کاربر
 def save_or_update_user(user_id, expire_time):
     conn = get_connection()
     cur = conn.cursor()
